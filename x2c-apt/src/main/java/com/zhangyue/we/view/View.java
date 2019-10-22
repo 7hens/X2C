@@ -114,6 +114,9 @@ public class View implements ITranslator {
                 case "fragment":
                     name = "android.widget.FrameLayout";
                     break;
+                case "SurfaceView":
+                    name = "";
+                    break;
                 default:
                     name = "android.widget." + name;
                     break;
