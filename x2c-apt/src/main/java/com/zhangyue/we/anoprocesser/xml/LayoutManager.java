@@ -299,8 +299,12 @@ public class LayoutManager {
             rFile = new File(basePath, javaPath);
             if (!rFile.exists()) {
                 Log.w("first R File not found, path = " + rFile.getAbsolutePath());
-                basePath = basePath.replace("/ap_generated_sources/", "/")
-                        .replace("/generated/", "/generated/not_namespaced_r_class_sources/")
+                basePath = basePath
+                        .replace(sep, "/")
+                        .replace("/generated/ap_generated_sources/", "/generated/not_namespaced_r_class_sources/")
+                        .replace("/generated/source/", "/generated/not_namespaced_r_class_sources/")
+                        .replace("/debug/", "Debug/")
+                        .replace("/release/", "Release/")
                         .replace("/out/", "/r/");
                 rFile = new File(basePath, javaPath);
             }
