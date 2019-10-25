@@ -19,7 +19,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    flavorDimensions "a", "b"
+    productFlavors {
+        a1 { dimension 'a' }
+        a2 { dimension 'a' }
+        b1 { dimension 'b' }
+    }
 }
 
 dependencies {

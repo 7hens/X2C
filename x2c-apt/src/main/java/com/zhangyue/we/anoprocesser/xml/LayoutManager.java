@@ -295,27 +295,20 @@ public class LayoutManager {
             JavaFileObject filerSourceFile = mFiler.createSourceFile("test");
             String path = filerSourceFile.toUri().getPath();
             String basePath = path.replace("apt", "r").replace("test.java", "");
-            rFile = new File(basePath, mPackageName.replace(".", sep) + sep + "R.java");
+            String javaPath = mPackageName.replace(".", sep) + sep + "R.java";
+            rFile = new File(basePath, javaPath);
             if (!rFile.exists()) {
-                basePath = path.substring(0, path.indexOf("apt"));
-                String javaFilePath = path.substring(path.indexOf("apt") + "apt".length());
-                File temp = new File(new File(new File(basePath).getParentFile(), "not_namespaced_r_class_sources"), javaFilePath).getParentFile();
-                File[] files = temp.listFiles();
-                if (files != null) {
-                    for (File dir : files) {
-                        File file = new File(dir, "r" + sep + mPackageName.replace(".", sep) + sep + "R.java");
-                        if (file.exists()) {
-                            rFile = file;
-                            break;
-                        }
-                    }
-                }
+                Log.w("first R File not found, path = " + rFile.getAbsolutePath());
+                basePath = basePath.replace("/ap_generated_sources/", "/")
+                        .replace("/generated/", "/generated/not_namespaced_r_class_sources/")
+                        .replace("/out/", "/r/");
+                rFile = new File(basePath, javaPath);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         if (rFile == null || !rFile.exists()) {
-            Log.e("X2C not find R.java!!!");
+            Log.e("X2C not find R.java!!!, path = " + rFile);
         }
         return rFile;
     }
