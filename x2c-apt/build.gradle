@@ -7,7 +7,6 @@ dependencies {
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
-
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
@@ -95,3 +94,5 @@ bintray {
         publish = true
     }
 }
+
+apply from: '../gradle/publish.gradle'

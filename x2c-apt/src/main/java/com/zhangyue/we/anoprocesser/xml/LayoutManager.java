@@ -292,21 +292,30 @@ public class LayoutManager {
         String sep = File.separator;
         File rFile = null;
         try {
+            String rJavaPath = mPackageName.replace(".", sep) + sep + "R.java";
+
             JavaFileObject filerSourceFile = mFiler.createSourceFile("test");
             String path = filerSourceFile.toUri().getPath();
-            String basePath = path.replace("apt", "r").replace("test.java", "");
-            String javaPath = mPackageName.replace(".", sep) + sep + "R.java";
-            rFile = new File(basePath, javaPath);
+            File x2jDir = new File(path.substring(0, path.indexOf("/build/")) + "/build/generated/source/x2j/main/");
+            rFile = new File(x2jDir, rJavaPath.replace("R.java", "X2J_R.java"));
+            if (rFile.exists()) {
+                return rFile;
+            }
+
+            String basePath = path.replace("/apt/", "/r/")
+                    .replace("/kapt/", "/r/")
+                    .replace("test.java", "");
+            rFile = new File(basePath, rJavaPath);
             if (!rFile.exists()) {
                 Log.w("first R File not found, path = " + rFile.getAbsolutePath());
                 basePath = basePath
                         .replace(sep, "/")
                         .replace("/generated/ap_generated_sources/", "/generated/not_namespaced_r_class_sources/")
                         .replace("/generated/source/", "/generated/not_namespaced_r_class_sources/")
-                        .replace("/debug/", "Debug/")
-                        .replace("/release/", "Release/")
+//                        .replace("/debug/", "Debug/")
+//                        .replace("/release/", "Release/")
                         .replace("/out/", "/r/");
-                rFile = new File(basePath, javaPath);
+                rFile = new File(basePath, rJavaPath);
             }
         } catch (IOException e) {
             e.printStackTrace();

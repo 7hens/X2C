@@ -1,0 +1,5 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.7hens.X2C'
+version = '-SNAPSHOT'

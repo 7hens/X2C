@@ -30,8 +30,6 @@ dependencies {
 }
 
 
-
-
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
@@ -39,6 +37,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/chengweidev'    // project homepage
 //项目的版本控制地址
 def gitUrl = 'https://github.com/chengweidev' // project git
+
 
 //发布到组织名称名字，必须填写
 group = "com.zhangyue.we"
@@ -130,3 +129,5 @@ bintray {
         publish = true
     }
 }
+
+apply from: '../gradle/publish.gradle'

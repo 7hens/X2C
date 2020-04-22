@@ -28,7 +28,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
@@ -127,3 +126,5 @@ bintray {
         publish = true
     }
 }
+
+apply from: '../gradle/publish.gradle'
